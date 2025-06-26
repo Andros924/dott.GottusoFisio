@@ -23,7 +23,7 @@ import { CommonModule } from '@angular/common';
               <div class="reel-container">
                 <div class="reel-header">
                   <div class="profile-mini">
-                    <img src="https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Dr. Gianluca Gottuso" />
+                    <img src="assets/gianlu.jpg" alt="Dr. Gianluca Gottuso" />
                     <div class="profile-info">
                       <span class="username">&#64;gianlucagottusofisioterapista</span>
                       <span class="verified">✓</span>
@@ -66,36 +66,13 @@ import { CommonModule } from '@angular/common';
             <div class="social-info">
               <div class="profile-card">
                 <div class="profile-image">
-                  <img src="https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Dr. Gianluca Gottuso" />
+                  <img src="assets/gianlu.jpg" alt="Dr. Gianluca Gottuso" />
                   <div class="status-ring"></div>
                 </div>
                 <div class="profile-details">
                   <h3>&#64;gianlucagottusofisioterapista</h3>
                   <p>Dr. Gianluca Gottuso</p>
                   <span class="badge professional">Fisioterapista Professionale</span>
-                </div>
-              </div>
-              
-              <div class="stats-grid">
-                <div class="stat-card">
-                  <span class="stat-number">2.5K+</span>
-                  <span class="stat-label">Followers</span>
-                  <div class="stat-icon">👥</div>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">150+</span>
-                  <span class="stat-label">Post</span>
-                  <div class="stat-icon">📸</div>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">50+</span>
-                  <span class="stat-label">Reels</span>
-                  <div class="stat-icon">🎬</div>
-                </div>
-                <div class="stat-card">
-                  <span class="stat-number">95%</span>
-                  <span class="stat-label">Engagement</span>
-                  <div class="stat-icon">❤️</div>
                 </div>
               </div>
               
@@ -412,53 +389,6 @@ import { CommonModule } from '@angular/common';
       font-weight: 500;
     }
     
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    
-    .stat-card {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-      border: 1px solid #f3f4f6;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-    }
-    
-    .stat-number {
-      display: block;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1f2937;
-      margin-bottom: 4px;
-    }
-    
-    .stat-label {
-      color: #6b7280;
-      font-size: 0.875rem;
-      margin-bottom: 8px;
-    }
-    
-    .stat-icon {
-      font-size: 1.25rem;
-      opacity: 0.6;
-    }
-    
     .content-preview {
       background: white;
       border-radius: 16px;
@@ -656,10 +586,6 @@ import { CommonModule } from '@angular/common';
       .instagram-main {
         gap: 40px;
       }
-      
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
     }
     
     @media (max-width: 768px) {
@@ -683,15 +609,6 @@ import { CommonModule } from '@angular/common';
       
       .social-buttons {
         gap: 12px;
-      }
-      
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-      
-      .stat-card {
-        padding: 16px;
       }
     }
   `]

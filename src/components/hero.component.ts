@@ -65,7 +65,7 @@ import { CommonModule } from '@angular/common';
                 </div>
               </div>
               <div class="image-glow"></div>
-              <img src="https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Dr. Gianluca Gottuso - Fisioterapista Professionale" />
+              <img src="assets/hero-gianlu.png" alt="Dr. Gianluca Gottuso - Fisioterapista Professionale" />
               <div class="image-overlay">
                 <div class="overlay-badge">
                   <span class="badge-icon">⭐</span>

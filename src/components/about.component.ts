@@ -38,24 +38,10 @@ import { CommonModule } from '@angular/common';
                 </div>
               </div>
             </div>
-            <div class="stats">
-              <div class="stat">
-                <span class="number">500+</span>
-                <span class="label">Pazienti Trattati</span>
-              </div>
-              <div class="stat">
-                <span class="number">95%</span>
-                <span class="label">Soddisfazione</span>
-              </div>
-              <div class="stat">
-                <span class="number">10+</span>
-                <span class="label">Anni Esperienza</span>
-              </div>
-            </div>
           </div>
           <div class="about-image">
             <div class="image-wrapper">
-              <img src="https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dr. Gianluca Gottuso nel suo studio" />
+              <img src="assets/gianlu.jpg" alt="Dr. Gianluca Gottuso nel suo studio" />
               <div class="overlay">
                 <div class="overlay-content">
                   <h4>Il tuo benessere è la mia priorità</h4>
@@ -136,29 +122,6 @@ import { CommonModule } from '@angular/common';
       line-height: 1.6;
     }
     
-    .stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 40px;
-    }
-    
-    .stat {
-      text-align: center;
-    }
-    
-    .stat .number {
-      display: block;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #2563eb;
-      margin-bottom: 8px;
-    }
-    
-    .stat .label {
-      color: #6b7280;
-      font-weight: 500;
-    }
-    
     .about-image {
       position: relative;
     }
@@ -211,11 +174,6 @@ import { CommonModule } from '@angular/common';
       
       .about-text h2 {
         font-size: 2.5rem;
-      }
-      
-      .stats {
-        justify-content: center;
-        gap: 32px;
       }
       
       .detail-item {
