@@ -31,12 +31,23 @@ import { CommonModule } from '@angular/common';
                   </div>
                   <div class="reel-live">
                     <span class="live-dot"></span>
-                    LIVE
+                    NUOVO
                   </div>
                 </div>
                 
-                <div class="reel-content">
-                  <div class="reel-placeholder">
+                <div class="reel-content" (click)="openInstagramReel()">
+                  <div class="reel-embed" *ngIf="!isLoading && reelData">
+                    <div class="reel-thumbnail">
+                      <img [src]="reelData.thumbnail_url" alt="Ultimo Reel Instagram" />
+                      <div class="play-overlay">
+                        <div class="play-button">
+                          <span class="play-icon">▶</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="reel-placeholder" *ngIf="isLoading || !reelData">
                     <div class="play-button">
                       <span class="play-icon">▶</span>
                     </div>
@@ -44,21 +55,28 @@ import { CommonModule } from '@angular/common';
                       <h3>Ultimo Reel</h3>
                       <p>Esercizi di mobilità per la colonna vertebrale</p>
                       <div class="reel-stats">
-                        <span>👍 1.2K</span>
-                        <span>💬 45</span>
-                        <span>🔄 89</span>
+                        <span>👍 Caricamento...</span>
+                        <span>💬 Caricamento...</span>
                       </div>
+                    </div>
+                  </div>
+                  
+                  <div class="reel-overlay" *ngIf="!isLoading && reelData">
+                    <h3>{{ reelData.title || 'Ultimo Reel' }}</h3>
+                    <p>{{ reelData.description || 'Contenuto esclusivo per il tuo benessere' }}</p>
+                    <div class="reel-stats">
+                      <span>👍 {{ formatNumber(reelData.likes || 0) }}</span>
+                      <span>💬 {{ formatNumber(reelData.comments || 0) }}</span>
+                      <span>🔄 {{ formatNumber(reelData.shares || 0) }}</span>
                     </div>
                   </div>
                 </div>
                 
                 <div class="reel-actions">
-                  <a href="https://www.instagram.com/gianlucagottusofisioterapista/reels/" 
-                     target="_blank" 
-                     class="btn btn-instagram">
+                  <button (click)="openInstagramReel()" class="btn btn-instagram">
                     <span class="icon">📺</span>
-                    Guarda tutti i Reel
-                  </a>
+                    Guarda il Reel su Instagram
+                  </button>
                 </div>
               </div>
             </div>
@@ -241,7 +259,7 @@ import { CommonModule } from '@angular/common';
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #ef4444;
+      background: #10b981;
       color: white;
       padding: 4px 8px;
       border-radius: 4px;
@@ -261,6 +279,42 @@ import { CommonModule } from '@angular/common';
       aspect-ratio: 9/16;
       position: relative;
       background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      cursor: pointer;
+      overflow: hidden;
+    }
+    
+    .reel-embed {
+      height: 100%;
+      position: relative;
+    }
+    
+    .reel-thumbnail {
+      height: 100%;
+      position: relative;
+    }
+    
+    .reel-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .play-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .reel-content:hover .play-overlay {
+      opacity: 1;
     }
     
     .reel-placeholder {
@@ -299,24 +353,35 @@ import { CommonModule } from '@angular/common';
       left: 20px;
       right: 20px;
       color: white;
+      z-index: 2;
     }
     
     .reel-overlay h3 {
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 8px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
     
     .reel-overlay p {
       font-size: 0.875rem;
       opacity: 0.9;
       margin-bottom: 12px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
     
     .reel-stats {
       display: flex;
       gap: 16px;
-      font-size: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .reel-stats span {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4px 8px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
     }
     
     .reel-actions {
@@ -328,6 +393,8 @@ import { CommonModule } from '@angular/common';
       background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
       color: white;
       width: 100%;
+      border: none;
+      cursor: pointer;
     }
     
     .profile-card {
@@ -614,6 +681,10 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class InstagramComponent implements OnInit {
+  isLoading = true;
+  reelData: any = null;
+  reelUrl = 'https://www.instagram.com/reel/DJ0pgWkNRzp/';
+  
   instagramPosts = [
     { 
       icon: '🏃‍♂️', 
@@ -660,7 +731,38 @@ export class InstagramComponent implements OnInit {
   ];
 
   ngOnInit() {
-    // Qui potresti integrare l'API di Instagram per recuperare i post reali
-    // Per ora usiamo dei placeholder con dati statici
+    this.loadReelData();
+  }
+
+  async loadReelData() {
+    try {
+      // Simuliamo i dati del reel specifico
+      // In un ambiente reale, useresti l'API Instagram oEmbed
+      this.reelData = {
+        title: 'Esercizi di mobilità per la colonna vertebrale',
+        description: 'Scopri come migliorare la mobilità della tua schiena con questi semplici esercizi',
+        thumbnail_url: 'assets/gianlu.jpg', // Placeholder - in realtà verrebbe dall'API
+        likes: 847,
+        comments: 23,
+        shares: 156,
+        url: this.reelUrl
+      };
+      
+      this.isLoading = false;
+    } catch (error) {
+      console.error('Errore nel caricamento del reel:', error);
+      this.isLoading = false;
+    }
+  }
+
+  openInstagramReel() {
+    window.open(this.reelUrl, '_blank');
+  }
+
+  formatNumber(num: number): string {
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
   }
 }
