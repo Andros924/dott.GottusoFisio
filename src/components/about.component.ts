@@ -55,7 +55,7 @@ import { CommonModule } from '@angular/common';
           </div>
           <div class="about-image">
             <div class="image-wrapper">
-              <img src="assets/gianlu.jpg" alt="Dr. Gianluca Gottuso nel suo studio" />
+              <img src="https://images.pexels.com/photos/5473298/pexels-photo-5473298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Dr. Gianluca Gottuso nel suo studio" />
               <div class="overlay">
                 <div class="overlay-content">
                   <h4>Il tuo benessere è la mia priorità</h4>
